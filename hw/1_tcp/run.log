@@ -1,0 +1,398 @@
+time="2024-11-01T22:38:56Z" level=warning msg="/home/tpos/networks_hw_tcp/hw/1_tcp/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#0 building with "default" instance using docker driver
+
+#1 [protocol internal] load build definition from Dockerfile
+#1 transferring dockerfile: 318B done
+#1 DONE 0.0s
+
+#2 [protocol internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 1.2s
+
+#3 [protocol internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [protocol 1/6] FROM docker.io/library/ubuntu:22.04@sha256:0e5e4a57c2499249aafc3b40fcd541e9a456aab7296681a3994d631587203f97
+#4 DONE 0.0s
+
+#5 [protocol internal] load build context
+#5 transferring context: 24.75kB done
+#5 DONE 0.0s
+
+#6 [protocol 2/6] RUN apt-get update && apt-get install -y     python3     python3-pip     iproute2     && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [protocol 3/6] COPY requirements.txt /tmp/requirements.txt
+#7 CACHED
+
+#8 [protocol 4/6] RUN pip3 install -r /tmp/requirements.txt
+#8 CACHED
+
+#9 [protocol 5/6] WORKDIR /app
+#9 CACHED
+
+#10 [protocol 6/6] COPY . /app
+#10 DONE 0.0s
+
+#11 [protocol] exporting to image
+#11 exporting layers done
+#11 writing image sha256:923fb400739fbbf9663da03127ccd700912e8197ff22ba685347111df6a181e2 done
+#11 naming to docker.io/library/protocol done
+#11 DONE 0.0s
+
+#12 [protocol] resolving provenance for metadata file
+#12 DONE 0.0s
+ Network 1_tcp_default  Creating
+ Network 1_tcp_default  Created
+ Container 1_tcp-protocol-1  Creating
+ Container 1_tcp-protocol-1  Created
+Attaching to protocol-1
+protocol-1  | + pytest -v protocol_test.py -o log_cli=true --durations=0
+protocol-1  | ============================= test session starts ==============================
+protocol-1  | platform linux -- Python 3.10.12, pytest-8.3.3, pluggy-1.5.0 -- /usr/bin/python3
+protocol-1  | cachedir: .pytest_cache
+protocol-1  | rootdir: /app
+protocol-1  | plugins: timeout-2.3.1
+protocol-1  | collecting ... collected 22 items
+protocol-1  | 
+protocol-1  | protocol_test.py::test_basic[10] PASSED                                  [  4%]
+protocol-1  | protocol_test.py::test_basic[50] PASSED                                  [  9%]
+protocol-1  | protocol_test.py::test_basic[100] PASSED                                 [ 13%]
+protocol-1  | protocol_test.py::test_small_loss[10] PASSED                             [ 18%]
+protocol-1  | protocol_test.py::test_small_loss[100] PASSED                            [ 22%]
+protocol-1  | protocol_test.py::test_small_loss[500] PASSED                            [ 27%]
+protocol-1  | protocol_test.py::test_small_duplicate[10] PASSED                        [ 31%]
+protocol-1  | protocol_test.py::test_small_duplicate[100] PASSED                       [ 36%]
+protocol-1  | protocol_test.py::test_small_duplicate[500] PASSED                       [ 40%]
+protocol-1  | protocol_test.py::test_high_loss[10] PASSED                              [ 45%]
+protocol-1  | protocol_test.py::test_high_loss[100] PASSED                             [ 50%]
+protocol-1  | protocol_test.py::test_high_loss[500] PASSED                             [ 54%]
+protocol-1  | protocol_test.py::test_high_duplicate[10] PASSED                         [ 59%]
+protocol-1  | protocol_test.py::test_high_duplicate[100] PASSED                        [ 63%]
+protocol-1  | protocol_test.py::test_high_duplicate[500] PASSED                        [ 68%]
+protocol-1  | protocol_test.py::test_large_message[100] PASSED                         [ 72%]
+protocol-1  | protocol_test.py::test_large_message[100000] PASSED                      [ 77%]
+protocol-1  | protocol_test.py::test_large_message[5000000] PASSED                     [ 81%]
+protocol-1  | protocol_test.py::test_parallel[10] PASSED                               [ 86%]
+protocol-1  | Exception in thread Thread-148 (__thread_sender):
+protocol-1  | Traceback (most recent call last):
+protocol-1  | protocol_test.py::test_parallel[100] PASSED                              [ 90%]
+protocol-1  | protocol_test.py::test_parallel[500] PASSED                              [ 95%]
+protocol-1  | protocol_test.py::test_perfomance[50000] PASSED                          [100%]
+protocol-1  | 
+protocol-1  | =============================== warnings summary ===============================
+protocol-1  | protocol_test.py::test_basic[50]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-4 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_basic[100]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-20 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_small_loss[100]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-28 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_small_loss[500]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-36 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_small_duplicate[10]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-44 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_small_duplicate[100]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-52 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_small_duplicate[500]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-60 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_high_loss[10]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-68 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_high_loss[100]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-76 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_high_loss[500]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-81 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_high_duplicate[10]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-92 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_high_duplicate[100]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-100 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_high_duplicate[500]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-108 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_large_message[100]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-114 (__thread_receiver)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 40, in __thread_receiver
+protocol-1  |       data = self.recvfrom(1432) # Suppose, actual MTU is 1432
+protocol-1  |     File "/app/protocol.py", line 17, in recvfrom
+protocol-1  |       msg, addr = self.udp_socket.recvfrom(n)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_large_message[5000000]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-132 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_parallel[10]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-140 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_parallel[500]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-153 (__thread_sender)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 36, in __thread_sender
+protocol-1  |       self.sendto(header + chunk)
+protocol-1  |     File "/app/protocol.py", line 14, in sendto
+protocol-1  |       return self.udp_socket.sendto(data, self.remote_addr)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | protocol_test.py::test_perfomance[50000]
+protocol-1  |   /usr/local/lib/python3.10/dist-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-125 (__thread_receiver)
+protocol-1  |   
+protocol-1  |   Traceback (most recent call last):
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+protocol-1  |       self.run()
+protocol-1  |     File "/usr/lib/python3.10/threading.py", line 953, in run
+protocol-1  |       self._target(*self._args, **self._kwargs)
+protocol-1  |     File "/app/protocol.py", line 40, in __thread_receiver
+protocol-1  |       data = self.recvfrom(1432) # Suppose, actual MTU is 1432
+protocol-1  |     File "/app/protocol.py", line 17, in recvfrom
+protocol-1  |       msg, addr = self.udp_socket.recvfrom(n)
+protocol-1  |   OSError: [Errno 9] Bad file descriptor
+protocol-1  |   
+protocol-1  |     warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+protocol-1  | 
+protocol-1  | -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+protocol-1  | ============================== slowest durations ===============================
+protocol-1  | 27.84s call     protocol_test.py::test_perfomance[50000]
+protocol-1  | 11.81s call     protocol_test.py::test_high_loss[500]
+protocol-1  | 11.20s call     protocol_test.py::test_high_duplicate[500]
+protocol-1  | 11.20s call     protocol_test.py::test_small_loss[500]
+protocol-1  | 11.15s call     protocol_test.py::test_small_duplicate[500]
+protocol-1  | 5.08s call     protocol_test.py::test_large_message[5000000]
+protocol-1  | 2.38s call     protocol_test.py::test_high_loss[100]
+protocol-1  | 2.26s call     protocol_test.py::test_small_loss[100]
+protocol-1  | 2.24s call     protocol_test.py::test_high_duplicate[100]
+protocol-1  | 2.23s call     protocol_test.py::test_small_duplicate[100]
+protocol-1  | 2.22s call     protocol_test.py::test_basic[100]
+protocol-1  | 1.59s call     protocol_test.py::test_parallel[500]
+protocol-1  | 1.11s call     protocol_test.py::test_basic[50]
+protocol-1  | 0.25s call     protocol_test.py::test_high_loss[10]
+protocol-1  | 0.23s call     protocol_test.py::test_small_duplicate[10]
+protocol-1  | 0.23s call     protocol_test.py::test_small_loss[10]
+protocol-1  | 0.23s call     protocol_test.py::test_high_duplicate[10]
+protocol-1  | 0.23s call     protocol_test.py::test_basic[10]
+protocol-1  | 0.10s call     protocol_test.py::test_parallel[100]
+protocol-1  | 0.07s call     protocol_test.py::test_large_message[100000]
+protocol-1  | 0.02s call     protocol_test.py::test_parallel[10]
+protocol-1  | 
+protocol-1  | (45 durations < 0.005s hidden.  Use -vv to show these durations.)
+protocol-1  | ================== 22 passed, 18 warnings in 93.70s (0:01:33) ==================
+[Kprotocol-1 exited with code 0
